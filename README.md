@@ -11,45 +11,49 @@ It's an interface with AFNetworking to make HTTP requests like POST, PUT, GET an
   
 ##How to use?
 
-  1. To make a GET you can use:
+  `GET`:
+```objective-c
+    [[NHRequest sharedInstance] getWithURLString:@"yourURL" andHeaders:nil withBlockSuccess:^(id responseObject) {
+       NSLog(@"responseObject: %@",responseObject);
+    } orFailure:^(NSError *error, id responseObject) {
+        NSLog(@"error: %@",error);
+        NSLog(@"responseObject: %@",responseObject);
+    }];
+```
+    
+    
+  `POST`:
+```objective-c
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:@"My name"] forKeys:[NSArray arrayWithObject:@"nameKey"]];
+    
+    [[NHRequest sharedInstance] postWithParametersAndValuesDict:parameters URLString:@"http://SomeURL.com.br" andHeaders:nil withBlockSuccess:^(id responseObject) {
+        NSLog(@"responseObject: %@",responseObject);
+    } orFailure:^(NSError *error, id responseObject) {
+        NSLog(@"error: %@",error);
+        NSLog(@"responseObject: %@",responseObject);
+    }];
+```
+    
+    
+  `PUT`
+```objective-c
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:@"My name"] forKeys:[NSArray arrayWithObject:@"nameKey"]];
+    
+    [[NHRequest sharedInstance] putWithParametersAndValuesDict:parameters URLString:@"http://SomeURL.com" andHeaders:nil withBlockSuccess:^(id responseObject) {
+        NSLog(@"responseObject: %@",responseObject);
+     } orFailure:^(NSError *error, id responseObject) {
+        NSLog(@"error: %@",error);
+      NSLog(@"responseObject: %@",responseObject);
+    }];
+```
 
-      `[[NHRequest sharedInstance] getWithURLString:@"yourURL" andHeaders:nil withBlockSuccess:^(id responseObject) {`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `} orFailure:^(NSError *error, id responseObject) {`
-        `NSLog(@"error: %@",error);`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `}];`
-    
-    
-  2. To POST
-    
-        `NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:@"My name"] forKeys:[NSArray arrayWithObject:@"nameKey"]];`
-    
-    `[[NHRequest sharedInstance] postWithParametersAndValuesDict:parameters URLString:@"http://SomeURL.com.br" andHeaders:nil withBlockSuccess:^(id responseObject) {`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `} orFailure:^(NSError *error, id responseObject) {`
-        `NSLog(@"error: %@",error);`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `}];`
 
-    
-  3. To PUT
-    
-    `NSDictionary *parameters = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObject:@"My name"] forKeys:[NSArray arrayWithObject:@"nameKey"]];`
-    
-    `[[NHRequest sharedInstance] putWithParametersAndValuesDict:parameters URLString:@"http://SomeURL.com" andHeaders:nil withBlockSuccess:^(id responseObject) {`
-        `NSLog(@"responseObject: %@",responseObject);`
-     `} orFailure:^(NSError *error, id responseObject) {`
-        `NSLog(@"error: %@",error);`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `}];`
-
-  3. To DELETE
-
-      `[[NHRequest sharedInstance] deleteWithURLString:@"yourURL" andHeaders:nil withBlockSuccess:^(id responseObject) {`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `} orFailure:^(NSError *error, id responseObject) {`
-        `NSLog(@"error: %@",error);`
-        `NSLog(@"responseObject: %@",responseObject);`
-    `}];`
-
+  `DELETE`
+```objective-c
+    [[NHRequest sharedInstance] deleteWithURLString:@"yourURL" andHeaders:nil withBlockSuccess:^(id responseObject) {
+        NSLog(@"responseObject: %@",responseObject);
+    } orFailure:^(NSError *error, id responseObject) {
+        NSLog(@"error: %@",error);
+        NSLog(@"responseObject: %@",responseObject);
+    }];
+```
